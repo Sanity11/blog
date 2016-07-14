@@ -1,6 +1,6 @@
 # blog
 
-## Experimentational repo
+## Experimental repo
 
 - DDD
 - CI
@@ -12,3 +12,4 @@
 - NGINX
 - PHP with XDebug
 - MySql
+
