@@ -1,0 +1,19 @@
+{
+  "name": "dion/blog",
+  "description": "Just an experimental blog",
+  "minimum-stability": "dev",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Dion Snoeijen",
+      "email": "hallo@dionsnoeijen.nl"
+    }
+  ],
+  "require": {
+    "symfony/http-kernel": "3.1.*",
+    "symfony/routing": "3.1.*"
+  },
+  "autoload": {
+    "psr-4": { "": "src/" }
+  }
+}
