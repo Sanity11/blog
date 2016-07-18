@@ -2,7 +2,7 @@ version: "2"
 services:
   blog:
     build: ./dockerfile/blog
-    container_name: blog
+    container_name: blog:latest
     depends_on:
       - php
       - mysql
@@ -20,7 +20,7 @@ services:
     environment:
       XDEBUG_CONFIG: "remote_host=192.168.1.17"
       PHP_IDE_CONFIG: "serverName=blog.dev"
-    container_name: php
+    container_name: php:latest
     restart: always
     ports:
       - "9000:9000"
@@ -28,7 +28,6 @@ services:
       - /Users/dionsnoeijen/www/blog/app:/var/www/blog
   mysql:
     image: mysql:latest
-    container_name: mysql
     restart: always
     ports:
       - "3306:3306"
