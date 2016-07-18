@@ -1,11 +1,26 @@
+services:
+  - docker
+
 language: php
 
 php:
   - '7.0'
 
-before_script: cd app && composer install && cd ..
+before_script:
+  - unexpand -t 4 Makefile > Makefile.tmp && mv Makefile.tmp Makefile
+  - cd app && composer install && cd ..
 
-script: phpunit -c app/phpunit.xml.dist --coverage-text
+script:
+  - phpunit -c app/phpunit.xml.dist --coverage-text
+  - make build_container_image
+
+after_failure:
+  - docker logs dionsnoeijen/blog
+
+after_success:
+  - docker login --email=$DOCKER_EMAIL --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD
+  - if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then docker push dionsnoeijen/blog:latest; fi
+  - if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then docker push dionsnoeijen/php:latest; fi
 
 notifications:
   email:
