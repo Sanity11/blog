@@ -4,7 +4,7 @@ php:
   - '5.6'
   - '7.0'
 
-before_script: cd app && composer install
+before_script: cd app && composer install && cd ..
 
 script: phpunit -c app/phpunit.xml.dist --coverage-text
 
