@@ -6,7 +6,7 @@
 SHELL=/bin/bash
 
 CONTAINER_TAG=dionsnoeijen/blog:latest
-CONTAINER_TAG=dionsnoeijen/php:latest
+CONTAINER_TAG=dionsnoeijen/php_fpm:latest
 
 all: build_container_image
 
