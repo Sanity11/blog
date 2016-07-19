@@ -6,7 +6,7 @@ services:
     container_name: blog
     image: dionsnoeijen/blog:latest
     depends_on:
-      - php
+      - php_fpm
       - mysql
     restart: always
     ports:
@@ -15,12 +15,12 @@ services:
     volumes:
       - ./docker/blog/app:/var/www/blog
     links:
-      - php
+      - php_fpm
       - mysql
-  php:
+  php_fpm:
     build:
       context: ./docker/php
-    image: dionsnoeijen/php:latest
+    image: dionsnoeijen/php_fpm:latest
     environment:
       XDEBUG_CONFIG: "remote_host=192.168.1.17"
       PHP_IDE_CONFIG: "serverName=blog.dev"
