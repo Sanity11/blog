@@ -9,6 +9,7 @@ php:
 env:
   DOCKER_COMPOSE_VERSION: 1.8.0-rc2
 
+# Install new Docker engine and specific version of docker compose
 before_install:
   - sudo apt-get update
   - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-engine
@@ -17,22 +18,29 @@ before_install:
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
 
+# Make make available
+# Install dependencies for blog app
 before_script:
   - unexpand -t 4 Makefile > Makefile.tmp && mv Makefile.tmp Makefile
-  - cd app && composer install && cd ..
+  - cd docker/blog/app && composer install && cd ../../..
 
+# Execute phpunit
+# Make build container image
 script:
-  - phpunit -c app/phpunit.xml.dist --coverage-text
+  - phpunit -c docker/blog/app/phpunit.xml.dist --coverage-text
   - make build_container_image
 
+# Log that failure
 after_failure:
   - docker logs dionsnoeijen/blog
 
+# Push them containers
 after_success:
   - docker login --email=$DOCKER_EMAIL --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD
   - if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then docker push dionsnoeijen/blog:latest; fi
   - if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then docker push dionsnoeijen/php:latest; fi
 
+# Let me know
 notifications:
   email:
     - hallo@dionsnoeijen.nl
