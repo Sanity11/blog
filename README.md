@@ -73,7 +73,7 @@ Docker containers are exposed in other containers by their name. To connect to M
 
     $db = new PDO('mysql:host=mysql;dbname=blog;charset=utf8mb4', 'blog', 'blog');
     
-Likewise php_fpm is running on php_fpm:9000, for your nginx config you could for example do:
+Likewise php_fpm is running on php_fpm:9000, for your nginx config you do for example:
 
     location ~ ^/index\.php(/|$) {
         fastcgi_pass php_fpm:9000;
@@ -104,5 +104,6 @@ Use ngrok for travis webhook maybe? So I can have a local deployment script
 - Error logging
 - Database storage location
 - Load balancing between containers, multiple servers ... hmmm
+- docker-compose-dev.yml for xdebug less deployment?
 
 

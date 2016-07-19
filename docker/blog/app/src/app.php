@@ -17,6 +17,10 @@ $routes->add(
     ])
 );
 
-$routes->add('bye', new Routing\Route('/bye'));
+$routes->add('bye', new Routing\Route('/bye', [
+    '_controller' => function(\Symfony\Component\HttpFoundation\Request $request) {
+        return new \Symfony\Component\HttpFoundation\Response('Bye bye!');
+    }])
+);
 
 return $routes;
