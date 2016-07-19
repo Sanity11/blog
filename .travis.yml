@@ -38,7 +38,7 @@ after_failure:
 after_success:
   - docker login --email=$DOCKER_EMAIL --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD
   - if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then docker push dionsnoeijen/blog:latest; fi
-  - if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then docker push dionsnoeijen/php:latest; fi
+  - if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then docker push dionsnoeijen/php_fpm:latest; fi
 
 # Let me know
 notifications:
