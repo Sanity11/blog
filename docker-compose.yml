@@ -19,7 +19,7 @@ services:
       - mysql
   php_fpm:
     build:
-      context: ./docker/php
+      context: ./docker/php_fpm
     image: dionsnoeijen/php_fpm:latest
     environment:
       XDEBUG_CONFIG: "remote_host=192.168.1.17"
