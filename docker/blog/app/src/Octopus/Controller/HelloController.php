@@ -12,7 +12,7 @@ class HelloController
         $httpHost = $request->server->get('HTTP_HOST');
 
         $response =
-            '<h1>It\'s working, deployed!!!</h1>' .
+            '<h1>It\'s working, deployed, aanpssing!!!</h1>' .
             '<br />' .
             '<img src="http://thecatapi.com/api/images/get?format=src&type=gif">';
 
@@ -20,7 +20,7 @@ class HelloController
 
         if ($httpHost === 'blog.dev') {
 
-            $response = '<h1>Owww yeah, we have a local dev environment.</h1>';
+            $response = '<h1>Owww yeah, aanpassing we have a local dev environment.</h1>';
         }
 
         return new Response($response);
