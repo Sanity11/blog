@@ -24,6 +24,8 @@
 /app/phpunit.xml
 /phpunit.xml
 
+phpunit.phar
+
 /build/
 
 /composer.phar
