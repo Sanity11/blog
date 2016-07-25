@@ -105,5 +105,6 @@ Use ngrok for travis webhook maybe? So I can have a local deployment script
 - Database storage location
 - Load balancing between containers, multiple servers ... hmmm
 - docker-compose-dev.yml for xdebug less deployment?
+- Monitoring containers?
 
 
