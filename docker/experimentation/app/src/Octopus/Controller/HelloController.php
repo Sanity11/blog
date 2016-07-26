@@ -18,7 +18,7 @@ class HelloController
 
         //xdebug_break();
 
-        if ($httpHost === 'blog.dev') {
+        if ($httpHost === 'experimentation.dev') {
 
             $response = '<h1>Owww yeah, aanpassing we have a local dev environment.</h1>';
         }

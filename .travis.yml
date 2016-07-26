@@ -19,25 +19,25 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 
 # Make make available
-# Install dependencies for blog app
+# Install dependencies for experimentation app
 before_script:
   - unexpand -t 4 Makefile > Makefile.tmp && mv Makefile.tmp Makefile
-  - cd docker/blog/app && composer install && cd ../../..
+  - cd docker/experimentation/app && composer install && cd ../../..
 
 # Execute phpunit
 # Make build container image
 script:
-  - phpunit -c docker/blog/app/phpunit.xml.dist --coverage-text
+  - phpunit -c docker/experimentation/app/phpunit.xml.dist --coverage-text
   - make build_container_image
 
 # Log that failure
 after_failure:
-  - docker logs dionsnoeijen/blog
+  - docker logs dionsnoeijen/experimentation
 
 # Push them containers
 after_success:
   - docker login --email=$DOCKER_EMAIL --username=$DOCKER_USERNAME --password=$DOCKER_PASSWORD
-  - if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then docker push dionsnoeijen/blog:latest; fi
+  - if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then docker push dionsnoeijen/experimentation:latest; fi
   - if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then docker push dionsnoeijen/php_fpm:latest; fi
 
 # Let me know

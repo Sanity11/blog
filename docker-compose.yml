@@ -2,9 +2,9 @@ version: "2"
 services:
   blog:
     build:
-      context: ./docker/blog
-    container_name: blog
-    image: dionsnoeijen/blog:latest
+      context: ./docker/experimentation
+    container_name: experimentation
+    image: dionsnoeijen/experimentation:latest
     depends_on:
       - php_fpm
       - mysql
@@ -13,7 +13,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./docker/blog/app:/var/www/blog
+      - ./docker/experimentation/app:/var/www/experimentation
     links:
       - php_fpm
       - mysql
@@ -23,13 +23,13 @@ services:
     image: dionsnoeijen/php_fpm:latest
     environment:
       XDEBUG_CONFIG: "remote_host=192.168.1.17"
-      PHP_IDE_CONFIG: "serverName=blog.dev"
+      PHP_IDE_CONFIG: "serverName=experimentation.dev"
     container_name: php_fpm
     restart: always
     ports:
       - "9000:9000"
     volumes:
-      - ./docker/blog/app:/var/www/blog
+      - ./docker/experimentation/app:/var/www/experimentation
   mysql:
     image: mysql:latest
     container_name: mysql
@@ -38,6 +38,6 @@ services:
       - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: blog
-      MYSQL_USER: blog
-      MYSQL_PASSWORD: blog
+      MYSQL_DATABASE: experimentation
+      MYSQL_USER: experimentation
+      MYSQL_PASSWORD: experimentation
