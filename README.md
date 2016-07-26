@@ -99,6 +99,45 @@ Don't forget to catch all other php requests that don't match the front controll
 
 Use ngrok for travis webhook maybe? So I can have a local deployment script
 
+## Unit Testing
+
+### Test symfony/console commands with ease like this
+
+    /**
+     * Setup application to mimic a cli, catch output in temp file
+     *
+     * @param string $command
+     * @return string|StreamOutput
+     * @throws \Exception
+     */
+    private function runCommand(string $command)
+    {
+        $fp = tmpfile();
+        $input = new StringInput($command);
+        $output = new StreamOutput($fp);
+
+        $application = new Application();
+        $application->setAutoExit(false);
+
+        $application->add(new OrderCommand());
+        $application->run($input, $output);
+
+        fseek($fp, 0);
+        $output = '';
+        while (!feof($fp)) {
+            $output = fread($fp, 4096);
+        }
+        fclose($fp);
+
+        return $output;
+    }
+
+Now you can test commands like this:
+
+    $output = $this->runCommand('somecommand <argument>');
+    
+    $this->assertEquals("I expect this output\n", $output);
+
 ## @todo
 
 - Error logging
